@@ -1,0 +1,109 @@
+<html>
+<div id="chartContainer">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+
+  <script type="text/javascript">
+    var svg = dimple.newSvg("#chartContainer", 590, 400);
+    d3.tsv("GDP_Pressao_TC.tsv", function (data) {
+
+      // Reduce the number of owners as this chart can get a bit busy
+      data = dimple.filterData(data, "Country", [
+        "Albania", "Brazil", "Germany", "Japan", "Nigeria"]);
+
+      var series,
+        // Set a background and foreground chart
+        charts = [
+          new dimple.chart(svg, null),
+          new dimple.chart(svg, data)
+        ],
+        lastDate = null,
+        countries = dimple.getUniqueValues(data, "Country");
+
+        // Define 2 nearly identical charts.  It's essential
+        // for this that the max and minimum values are fixed
+        // and unmoving otherwise the background chart will get
+        // out of sync with the foreground the background chart's
+        // axes are hidden and it's colors are faded.  Both have
+        // their borders set to white, which looks better on this chart
+        charts.forEach(function (chart, i) {
+          var x, y, z;
+          chart.setBounds(60, 30, 510, 330);
+          x = chart.addLogAxis("x", "GDP");
+          x.overrideMax = 45000;
+          x.overrideMin = 200;
+          // x.hidden = (i === 0);
+          x.logBase = 10;
+
+
+          y = chart.addMeasureAxis("y", "SBP_Male");
+          y.overrideMin = 120;
+          y.overrideMax = 150;
+
+          // y.hidden = (i === 0);
+          
+          
+          z = chart.addMeasureAxis("z", "TC_Male_mg/dL");
+          z.overrideMax = 250;
+      
+          chart.addLegend(70, 10, 510, 20, "right");
+          // Ensure the same colors for every owner in both charts
+          // differing by opacity
+          countries.forEach(function (country, k) {
+            chart.assignColor(
+              country,
+              charts[0].defaultColors[k].fill,
+              "white",
+              (i === 0 ? 0.3 : 1));
+            }, this);
+          }, this);
+
+          // Define a storyboard on the main chart, this will iterate
+          // all dates and redraw for each, the callback will build the
+          // the background chart
+          charts[1].setStoryboard("Year", function (y) {
+            // Use the last date variable to manage the previous tick's data
+            if (lastDate !== null) {
+              // Pull the previous data
+              var lastData = dimple.filterData(data, "Year", lastDate);
+              // Add a series to the background chart to display old position
+              var lastSeries = charts[0].addSeries("Country", dimple.plot.bubble);
+              // Average suits these measures better
+              
+              lastSeries.aggregate = dimple.aggregateMethod.avg;
+              
+              // Give each series its own data at different periods
+              lastSeries.data = lastData;
+              // Draw the background chart
+              charts[0].draw();
+              // Class all shapes as .historic
+              lastSeries.shapes.attr("class", "historic");
+                // Reduce all opacity and remove once opacity drops below 5%
+                d3.selectAll(".historic")
+                  .each(function () {
+                    var shape = d3.select(this),
+                      opacity = shape.style("opacity") - 0.02;
+                    if (opacity < 0.1) {
+                      shape.remove();
+                    } else {
+                      shape.style("opacity", opacity);
+                    }
+                  });
+                }
+                lastDate = y;
+            });
+
+            // Add the primary series to the main chart
+            series = charts[1].addSeries("Country", dimple.plot.bubble)
+            series.aggregate = dimple.aggregateMethod.avg;
+            // Draw the main chart
+            charts[1].draw();
+
+            // Add some border weight to the main series so it separates a bit from
+            // the former period shadows
+            d3.selectAll("circle").style("stroke-width", 2);
+
+        });
+    </script>
+</div>
+</html>
