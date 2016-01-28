@@ -1,109 +1,391 @@
 <html>
+
+
+<head>
+  <style>
+    body {
+      margin-left: 100px;
+      margin-top: 20px;
+      margin-right: 100px;
+      font-family: Verdana, Geneva, sans-serif;
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <h2>Relationship between Gross Domestic Product (GDP) and Systolic Blood Pressure (SBP)  </h1>
+
+<h3>Datasets</h3>
+<p>
+    For this project I decided to use datasets from Gapminder:
+    <ul>
+      <li> 
+      <a href = http://spreadsheets.google.com/pub?key=0ArfEDsV3bBwCdHNwRm9DN1FnT3hXWWZVSncxMkZyS2c&output=xls> SBP Male </a>
+      </li>
+
+      <li>
+      <a href http://spreadsheets.google.com/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xls> GDP </a>
+    </li>
+
+  </ul>
+
+    In general, all countries showed GDP increase trend from 1980 to 2008, but...
+  </p>
+
+  <h3>...how about Health?</h3>
+
+  <p>
+    Countries showed opposite trends with respect to SBP. <br>
+
+    Poor countries increased their SBP, with GDP. <br>
+    Rich countries experienced inverse behavior.
+
+  </p>
+
 <div id="chartContainer">
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
 
+
   <script type="text/javascript">
-    var svg = dimple.newSvg("#chartContainer", 590, 400);
-    d3.tsv("GDP_Pressao_TC.tsv", function (data) {
+      var svg = dimple.newSvg("#chartContainer", 590, 400);
+      d3.tsv("GDP_Pressao_TC.tsv", function (data) {
 
-      // Reduce the number of owners as this chart can get a bit busy
+          // Filter for 1 year
+          
       data = dimple.filterData(data, "Country", [
-        "Albania", "Brazil", "Germany", "Japan", "Nigeria"]);
+        "", "Bangladesh",
+        "Sudan", "Mozambique",
+        "Brazil", "Germany", "Japan", "Denmark"]);
 
-      var series,
-        // Set a background and foreground chart
-        charts = [
-          new dimple.chart(svg, null),
-          new dimple.chart(svg, data)
-        ],
-        lastDate = null,
-        countries = dimple.getUniqueValues(data, "Country");
+          // Create the indicator chart on the right of the main chart
+          var indicator = new dimple.chart(svg, data);
 
-        // Define 2 nearly identical charts.  It's essential
-        // for this that the max and minimum values are fixed
-        // and unmoving otherwise the background chart will get
-        // out of sync with the foreground the background chart's
-        // axes are hidden and it's colors are faded.  Both have
-        // their borders set to white, which looks better on this chart
-        charts.forEach(function (chart, i) {
-          var x, y, z;
-          chart.setBounds(60, 30, 510, 330);
-          x = chart.addLogAxis("x", "GDP");
-          x.overrideMax = 45000;
+          // Pick blue as the default and orange for the selected month
+          var defaultColor = indicator.defaultColors[0];
+          var indicatorColor = indicator.defaultColors[2];
+
+          // The frame duration for the animation in milliseconds
+          var frame = 2000;
+
+          var firstTick = true;
+
+          // Place the indicator bar chart to the right
+          indicator.setBounds(434, 49, 253, 311);
+
+          // Add dates along the y axis
+          var y = indicator.addCategoryAxis("y", "Year");
+          y.addOrderRule("Year", "Desc");
+
+          
+          // Use sales for bar size and hide the axis
+          var x = indicator.addMeasureAxis("x", "Year");
+          x.hidden = true;
+          
+
+          // Add the bars to the indicator and add event handlers
+          var s = indicator.addSeries(["Year"], dimple.plot.bar);
+          s.addEventHandler("click", onClick);
+          // Draw the side chart
+          indicator.draw();
+
+          // Remove the title from the y axis
+          y.titleShape.remove();
+
+          // Remove the lines from the y axis
+          y.shapes.selectAll("line,path").remove();
+
+          // Move the y axis text inside the plot area
+          y.shapes.selectAll("text")
+                  .style("text-anchor", "start")
+                  .style("font-size", "11px")
+                  .attr("transform", "translate(18, 0.5)");
+          
+
+          // This block simply adds the legend title. I put it into a d3 data
+          // object to split it onto 2 lines.  This technique works with any
+          // number of lines, it isn't dimple specific.
+          svg.selectAll("title_text")
+                  .data(["Click bar to select",
+                      "and pause. Click again",
+                      "to resume animation"])
+                  .enter()
+                  .append("text")
+                  .attr("x", 435)
+                  .attr("y", function (d, i) { return 15 + i * 12; })
+                  .style("font-family", "sans-serif")
+                  .style("font-size", "10px")
+                  .style("color", "Black")
+                  .text(function (d) { return d; });
+
+          // Manually set the bar colors
+          s.shapes
+                  .attr("rx", 10)
+                  .attr("ry", 10)
+                  .style("fill", function (d) { return (d.y === 'Jan-12' ? indicatorColor.fill : defaultColor.fill) })
+                  .style("stroke", function (d) { return (d.y === 'Jan-12' ? indicatorColor.stroke : defaultColor.stroke) })
+                  .style("opacity", 0.4);
+
+          // Draw the main chart
+          var bubbles = new dimple.chart(svg, data);
+          bubbles.setBounds(60, 50, 355, 310)
+          //bubbles.addMeasureAxis("x", "GDP");
+          var x = bubbles.addLogAxis("x", "GDP");
           x.overrideMin = 200;
-          // x.hidden = (i === 0);
-          x.logBase = 10;
+          y = bubbles.addMeasureAxis("y", "SBP_Male");
+          y.overrideMin = 122;
+          y.overrideMax = 142;
+          //bubbles.addSeries(["GDP"], dimple.plot.line) 
+          bubbles.addSeries(["Country"], dimple.plot.bubble)
+          bubbles.addLegend(60, 10, 410, 60);
 
+          // Add a storyboard to the main chart and set the tick event
+          var story = bubbles.setStoryboard("Year", onTick);
+          //var story = bubbles.setStoryboard("Year");
+          // Change the frame duration
+          story.frameDuration = frame;
+          // Order the storyboard by date
+          story.addOrderRule("Year");
 
-          y = chart.addMeasureAxis("y", "SBP_Male");
-          y.overrideMin = 120;
-          y.overrideMax = 150;
+          // Draw the bubble chart
+          bubbles.draw();
 
-          // y.hidden = (i === 0);
-          
-          
-          z = chart.addMeasureAxis("z", "TC_Male_mg/dL");
-          z.overrideMax = 250;
-      
-          chart.addLegend(70, 10, 510, 20, "right");
-          // Ensure the same colors for every owner in both charts
-          // differing by opacity
-          countries.forEach(function (country, k) {
-            chart.assignColor(
-              country,
-              charts[0].defaultColors[k].fill,
-              "white",
-              (i === 0 ? 0.3 : 1));
-            }, this);
-          }, this);
+          // Orphan the legends as they are consistent but by default they
+          // will refresh on tick
+          bubbles.legends = [];
+          // Remove the storyboard label because the chart will indicate the
+          // current month instead of the label
+          story.storyLabel.remove();
 
-          // Define a storyboard on the main chart, this will iterate
-          // all dates and redraw for each, the callback will build the
-          // the background chart
-          charts[1].setStoryboard("Year", function (y) {
-            // Use the last date variable to manage the previous tick's data
-            if (lastDate !== null) {
-              // Pull the previous data
-              var lastData = dimple.filterData(data, "Year", lastDate);
-              // Add a series to the background chart to display old position
-              var lastSeries = charts[0].addSeries("Country", dimple.plot.bubble);
-              // Average suits these measures better
-              
-              lastSeries.aggregate = dimple.aggregateMethod.avg;
-              
-              // Give each series its own data at different periods
-              lastSeries.data = lastData;
-              // Draw the background chart
-              charts[0].draw();
-              // Class all shapes as .historic
-              lastSeries.shapes.attr("class", "historic");
-                // Reduce all opacity and remove once opacity drops below 5%
-                d3.selectAll(".historic")
-                  .each(function () {
-                    var shape = d3.select(this),
-                      opacity = shape.style("opacity") - 0.02;
-                    if (opacity < 0.1) {
-                      shape.remove();
-                    } else {
-                      shape.style("opacity", opacity);
-                    }
-                  });
-                }
-                lastDate = y;
-            });
+          // On click of the side chart
+          function onClick(e) {
+              // Pause the animation
+              story.pauseAnimation();
+              // If it is already selected resume the animation
+              // otherwise pause and move to the selected month
+              if (e.yValue === story.getFrameValue()) {
+                  story.startAnimation();
+              } else {
+                  story.goToFrame(e.yValue);
+                  story.pauseAnimation();
+              }
+          }
 
-            // Add the primary series to the main chart
-            series = charts[1].addSeries("Country", dimple.plot.bubble)
-            series.aggregate = dimple.aggregateMethod.avg;
-            // Draw the main chart
-            charts[1].draw();
-
-            // Add some border weight to the main series so it separates a bit from
-            // the former period shadows
-            d3.selectAll("circle").style("stroke-width", 2);
-
-        });
-    </script>
+          // On tick of the main charts storyboard
+          function onTick(e) {
+              if (!firstTick) {
+                  // Color all shapes the same
+                  s.shapes
+                          .transition()
+                          .duration(frame / 2)
+                          .style("fill", function (d) { return (d.y === e ? indicatorColor.fill : defaultColor.fill) })
+                          .style("stroke", function (d) { return (d.y === e ? indicatorColor.stroke : defaultColor.stroke) });
+              }
+              firstTick = false;
+          }
+      });
+  </script>
 </div>
+
+
+
+  <h3>Rich and Poor</h3>
+
+  <p>
+    To observe the relationship in a expanded set, below a histogram of the Pearson's r correlation for 180 countries for the analyzed timeframe. Indeed, richer countries became helthier with 
+    GDP increase. On the other hand, poor countries did not (they show up more on the right-hand side). 
+
+  </p>
+   
+  
+   <img src="GDP and SBP correlation - fig 2.jpg" alt="Rich and Poor" style="width:600px;height:450px;">
+
+  <h3>List of Countries</h3>
+  <ul>
+    <li> Albania </li>
+<li> Algeria </li>
+<li> Andorra </li>
+<li> Angola </li>
+<li> Antigua and Barbuda </li>
+<li> Argentina </li>
+<li> Armenia </li>
+<li> Australia </li>
+<li> Austria </li>
+<li> Azerbaijan </li>
+<li> Bahamas </li>
+<li> Bahrain </li>
+<li> Bangladesh </li>
+<li> Barbados </li>
+<li> Belarus </li>
+<li> Belgium </li>
+<li> Belize </li>
+<li> Benin </li>
+<li> Bermuda </li>
+<li> Bhutan </li>
+<li> Bolivia </li>
+<li> Bosnia and Herzegovina </li>
+<li> Botswana </li>
+<li> Brazil </li>
+<li> Brunei </li>
+<li> Bulgaria </li>
+<li> Burkina Faso </li>
+<li> Burundi </li>
+<li> Cambodia </li>
+<li> Cameroon </li>
+<li> Canada </li>
+<li> Cape Verde </li>
+<li> Chad </li>
+<li> Chile </li>
+<li> China </li>
+<li> Colombia </li>
+<li> Comoros </li>
+<li> Congo, Dem. Rep. </li>
+<li> Congo, Rep. </li>
+<li> Costa Rica </li>
+<li> Cote d'Ivoire </li>
+<li> Croatia </li>
+<li> Cuba </li>
+<li> Cyprus </li>
+<li> Denmark </li>
+<li> Djibouti </li>
+<li> Dominica </li>
+<li> Ecuador </li>
+<li> Egypt </li>
+<li> El Salvador </li>
+<li> Equatorial Guinea </li>
+<li> Eritrea </li>
+<li> Estonia </li>
+<li> Ethiopia </li>
+<li> Fiji </li>
+<li> Finland </li>
+<li> France </li>
+<li> French Polynesia </li>
+<li> Gabon </li>
+<li> Gambia </li>
+<li> Georgia </li>
+<li> Germany </li>
+<li> Ghana </li>
+<li> Greece </li>
+<li> Greenland </li>
+<li> Grenada </li>
+<li> Guatemala </li>
+<li> Guinea </li>
+<li> Guinea-Bissau </li>
+<li> Guyana </li>
+<li> Haiti </li>
+<li> Honduras </li>
+<li> Hong Kong, China </li>
+<li> Hungary </li>
+<li> Iceland </li>
+<li> India </li>
+<li> Indonesia </li>
+<li> Iran </li>
+<li> Iraq </li>
+<li> Ireland </li>
+<li> Israel </li>
+<li> Italy </li>
+<li> Jamaica </li>
+<li> Japan </li>
+<li> Jordan </li>
+<li> Kazakhstan </li>
+<li> Kenya </li>
+<li> Kiribati </li>
+<li> Kuwait </li>
+<li> Latvia </li>
+<li> Lebanon </li>
+<li> Lesotho </li>
+<li> Liberia </li>
+<li> Libya </li>
+<li> Lithuania </li>
+<li> Luxembourg </li>
+<li> Macao, China </li>
+<li> Macedonia, FYR </li>
+<li> Madagascar </li>
+<li> Malawi </li>
+<li> Malaysia </li>
+<li> Maldives </li>
+<li> Mali </li>
+<li> Malta </li>
+<li> Marshall Islands </li>
+<li> Mauritania </li>
+<li> Mauritius </li>
+<li> Mexico </li>
+<li> Micronesia, Fed. Sts. </li>
+<li> Moldova </li>
+<li> Mongolia </li>
+<li> Montenegro </li>
+<li> Morocco </li>
+<li> Mozambique </li>
+<li> Namibia </li>
+<li> Nepal </li>
+<li> Netherlands </li>
+<li> New Zealand </li>
+<li> Nicaragua </li>
+<li> Niger </li>
+<li> Nigeria </li>
+<li> Norway </li>
+<li> Oman </li>
+<li> Pakistan </li>
+<li> Palau </li>
+<li> Panama </li>
+<li> Papua New Guinea </li>
+<li> Paraguay </li>
+<li> Peru </li>
+<li> Philippines </li>
+<li> Poland </li>
+<li> Portugal </li>
+<li> Puerto Rico </li>
+<li> Qatar </li>
+<li> Romania </li>
+<li> Russia </li>
+<li> Rwanda </li>
+<li> Samoa </li>
+<li> Sao Tome and Principe </li>
+<li> Saudi Arabia </li>
+<li> Senegal </li>
+<li> Serbia </li>
+<li> Seychelles </li>
+<li> Sierra Leone </li>
+<li> Singapore </li>
+<li> Slovak Republic </li>
+<li> Slovenia </li>
+<li> Solomon Islands </li>
+<li> South Africa </li>
+<li> Spain </li>
+<li> Sri Lanka </li>
+<li> Sudan </li>
+<li> Suriname </li>
+<li> Swaziland </li>
+<li> Sweden </li>
+<li> Switzerland </li>
+<li> Syria </li>
+<li> Tajikistan </li>
+<li> Tanzania </li>
+<li> Thailand </li>
+<li> Timor-Leste </li>
+<li> Togo </li>
+<li> Tonga </li>
+<li> Trinidad and Tobago </li>
+<li> Tunisia </li>
+<li> Turkey </li>
+<li> Turkmenistan </li>
+<li> Uganda </li>
+<li> Ukraine </li>
+<li> United Arab Emirates </li>
+<li> United Kingdom </li>
+<li> United States </li>
+<li> Uruguay </li>
+<li> Uzbekistan </li>
+<li> Vanuatu </li>
+<li> Venezuela </li>
+<li> Vietnam </li>
+<li> West Bank and Gaza </li>
+<li> Zambia </li>
+<li> Zimbabwe </li>
+  </ul>
+
+</body>
+
 </html>
