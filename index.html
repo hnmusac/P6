@@ -53,7 +53,6 @@
       var svg = dimple.newSvg("#chartContainer", 590, 400);
       d3.tsv("GDP_Pressao_TC.tsv", function (data) {
 
-          // Filter for 1 year
           
       data = dimple.filterData(data, "Country", [
         "", "Bangladesh",
@@ -77,16 +76,16 @@
 
           // Add dates along the y axis
           var y = indicator.addCategoryAxis("y", "Year");
-          y.addOrderRule("Year", "Desc");
+           y.addOrderRule("Year", "Desc");
 
           
           // Use sales for bar size and hide the axis
-          var x = indicator.addMeasureAxis("x", "Year");
-          x.hidden = true;
+           var x = indicator.addMeasureAxis("x", "Year");
+           x.hidden = true;
           
 
           // Add the bars to the indicator and add event handlers
-          var s = indicator.addSeries(["Year"], dimple.plot.bar);
+          var s = indicator.addSeries(null, dimple.plot.bar);
           s.addEventHandler("click", onClick);
           // Draw the side chart
           indicator.draw();
@@ -199,8 +198,8 @@
 
   </p>
    
-  
-   <img src="http://s14.postimg.org/bbfi9cv7l/fig_2.jpg" style="width:600px;height:450px;">
+
+     <img src="http://s23.postimg.org/4i13aofd7/Fig_3.jpg" style="width:600px;height:450px;">
 
   <h3>List of Countries</h3>
   <ul>
