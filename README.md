@@ -16,7 +16,7 @@ Utilized dimple.js to show an animated version of data compiled from Gapmider.
 
 ## Feedback
 
-All welcome!
+Feedback was on making the graph more friendly to an audience not familiar with statistical terms.
 
 ## Resources
 

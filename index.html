@@ -74,19 +74,30 @@
           // Place the indicator bar chart to the right
           indicator.setBounds(434, 49, 253, 311);
 
-          // Add dates along the y axis
+          // Add Years along the y axis
           var y = indicator.addCategoryAxis("y", "Year");
            y.addOrderRule("Year", "Desc");
 
           
-          // Use sales for bar size and hide the axis
+          // Use Years for bar size and hide the axis
            var x = indicator.addMeasureAxis("x", "Year");
            x.hidden = true;
           
 
+          
+          
+
           // Add the bars to the indicator and add event handlers
+          
+          
           var s = indicator.addSeries(null, dimple.plot.bar);
           s.addEventHandler("click", onClick);
+          s.addEventHandler("mouseover", function (e) {
+                  // do nothing
+                  });
+
+
+
           // Draw the side chart
           indicator.draw();
 
@@ -145,7 +156,7 @@
           //var story = bubbles.setStoryboard("Year");
           // Change the frame duration
           story.frameDuration = frame;
-          // Order the storyboard by date
+          // Order the storyboard by Year
           story.addOrderRule("Year");
 
           // Draw the bubble chart
