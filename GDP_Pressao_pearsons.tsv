@@ -1,0 +1,177 @@
+	index	GDP_group	pearsons_r	Pearsons r correlation	count
+0	Albania	lower-mid	0.492301208306	(0.4, 0.5]	1
+1	Algeria	lower-mid	0.336596115034	(0.3, 0.4]	1
+2	Andorra	high	-0.636873146981	(-0.7, -0.6]	1
+3	Angola	low	0.534764928748	(0.5, 0.6]	1
+4	Antigua and Barbuda	high	0.0842312097127	(-0, 0.1]	1
+5	Argentina	upper-mid	-0.178624023522	(-0.2, -0.1]	1
+6	Armenia	lower-mid	0.463457173341	(0.4, 0.5]	1
+7	Australia	high	-0.982323700591	(-1, -0.9]	1
+8	Austria	high	-0.976578764591	(-1, -0.9]	1
+9	Azerbaijan	lower-mid	0.173243443099	(0.1, 0.2]	1
+10	Bahamas	high	-0.608483580063	(-0.7, -0.6]	1
+11	Bahrain	high	-0.763057585331	(-0.8, -0.7]	1
+12	Bangladesh	low	0.977976822271	(0.9, 1]	1
+13	Barbados	upper-mid	-0.648144270412	(-0.7, -0.6]	1
+14	Belarus	lower-mid	0.493562021542	(0.4, 0.5]	1
+15	Belgium	high	-0.977147151635	(-1, -0.9]	1
+16	Belize	lower-mid	-0.26369972464	(-0.3, -0.2]	1
+17	Benin	low	0.139311126481	(0.1, 0.2]	1
+18	Bermuda	high	-0.638632404169	(-0.7, -0.6]	1
+19	Bhutan	lower-mid	0.982015397185	(0.9, 1]	1
+20	Bolivia	lower-mid	-0.0855182836917	(-0.1, -0]	1
+21	Bosnia and Herzegovina	lower-mid	0.80889346727	(0.8, 0.9]	1
+22	Botswana	upper-mid	0.853238151035	(0.8, 0.9]	1
+23	Brazil	upper-mid	-0.458578294169	(-0.5, -0.4]	1
+24	Brunei	high	0.861557045485	(0.8, 0.9]	1
+25	Bulgaria	lower-mid	-0.4023406417	(-0.5, -0.4]	1
+26	Burkina Faso	low	0.285326936847	(0.2, 0.3]	1
+27	Burundi	low	-0.74285405647	(-0.8, -0.7]	1
+28	Cambodia	low	0.920011541196	(0.9, 1]	1
+29	Cameroon	low	0.781670517037	(0.7, 0.8]	1
+30	Canada	high	-0.983983802136	(-1, -0.9]	1
+31	Cape Verde	lower-mid	0.558925406833	(0.5, 0.6]	1
+32	Chad	low	0.753436548723	(0.7, 0.8]	1
+33	Chile	upper-mid	0.2257876946	(0.2, 0.3]	1
+34	China	lower-mid	0.170604887644	(0.1, 0.2]	1
+35	Colombia	lower-mid	-0.450872221636	(-0.5, -0.4]	1
+36	Comoros	low	-0.732481266027	(-0.8, -0.7]	1
+37	Congo, Dem. Rep.	low	0.733832549326	(0.7, 0.8]	1
+38	Congo, Rep.	lower-mid	0.681990398127	(0.6, 0.7]	1
+39	Costa Rica	upper-mid	-0.432388761286	(-0.5, -0.4]	1
+40	Cote d'Ivoire	low	0.758872540434	(0.7, 0.8]	1
+41	Croatia	upper-mid	-0.775648305032	(-0.8, -0.7]	1
+42	Cuba	upper-mid	0.477984264553	(0.4, 0.5]	1
+43	Cyprus	high	-0.966436979085	(-1, -0.9]	1
+44	Denmark	high	-0.96870948957	(-1, -0.9]	1
+45	Djibouti	low	0.325858048303	(0.3, 0.4]	1
+46	Dominica	upper-mid	0.0908394403759	(-0, 0.1]	1
+47	Ecuador	lower-mid	-0.242885392865	(-0.3, -0.2]	1
+48	Egypt	lower-mid	0.371629613059	(0.3, 0.4]	1
+49	El Salvador	lower-mid	-0.228336663041	(-0.3, -0.2]	1
+50	Equatorial Guinea	upper-mid	0.966105017185	(0.9, 1]	1
+51	Eritrea	low	-0.136708870743	(-0.2, -0.1]	1
+52	Estonia	upper-mid	0.804998333727	(0.8, 0.9]	1
+53	Ethiopia	low	0.525071430219	(0.5, 0.6]	1
+54	Fiji	lower-mid	0.876909521547	(0.8, 0.9]	1
+55	Finland	high	-0.822135396735	(-0.9, -0.8]	1
+56	France	high	-0.971145623715	(-1, -0.9]	1
+58	Gabon	upper-mid	0.820466420961	(0.8, 0.9]	1
+59	Gambia	low	0.771371973526	(0.7, 0.8]	1
+60	Georgia	lower-mid	0.788709082562	(0.7, 0.8]	1
+61	Germany	high	-0.916949317016	(-1, -0.9]	1
+62	Ghana	low	-0.0970707765751	(-0.1, -0]	1
+63	Greece	high	-0.685628474641	(-0.7, -0.6]	1
+64	Greenland	high	-0.575755756706	(-0.6, -0.5]	1
+65	Grenada	upper-mid	0.469409929496	(0.4, 0.5]	1
+66	Guatemala	lower-mid	0.0543578130371	(-0, 0.1]	1
+67	Guinea	low	0.900592369215	(0.9, 1]	1
+68	Guinea-Bissau	low	-0.748096476717	(-0.8, -0.7]	1
+69	Guyana	lower-mid	0.792733610139	(0.7, 0.8]	1
+70	Haiti	low	-0.496173078645	(-0.5, -0.4]	1
+71	Honduras	lower-mid	0.257408240871	(0.2, 0.3]	1
+72	Hong Kong, China	high	-0.865086821827	(-0.9, -0.8]	1
+73	Hungary	upper-mid	-0.656388606096	(-0.7, -0.6]	1
+74	Iceland	high	-0.745648180116	(-0.8, -0.7]	1
+75	India	low	0.525298159985	(0.5, 0.6]	1
+76	Indonesia	lower-mid	0.786909997609	(0.7, 0.8]	1
+77	Iran	lower-mid	-0.0166620657083	(-0.1, -0]	1
+78	Iraq	low	-0.569341409593	(-0.6, -0.5]	1
+79	Ireland	high	-0.70445088574	(-0.8, -0.7]	1
+80	Israel	high	-0.958452545883	(-1, -0.9]	1
+81	Italy	high	-0.957069027313	(-1, -0.9]	1
+83	Japan	high	-0.965075184332	(-1, -0.9]	1
+84	Jordan	lower-mid	0.351391762061	(0.3, 0.4]	1
+85	Kazakhstan	lower-mid	0.304448554855	(0.3, 0.4]	1
+86	Kenya	low	0.278637749716	(0.2, 0.3]	1
+87	Kiribati	low	0.748677921992	(0.7, 0.8]	1
+88	Kuwait	high	-0.682263681844	(-0.7, -0.6]	1
+89	Latvia	upper-mid	0.075976933638	(-0, 0.1]	1
+90	Lebanon	upper-mid	-0.309761211879	(-0.4, -0.3]	1
+91	Lesotho	low	0.876666740259	(0.8, 0.9]	1
+92	Liberia	low	0.81447017077	(0.8, 0.9]	1
+93	Libya	upper-mid	0.924158055161	(0.9, 1]	1
+94	Lithuania	upper-mid	0.149206344311	(0.1, 0.2]	1
+95	Luxembourg	high	-0.980268727465	(-1, -0.9]	1
+96	Macao, China	high	-0.680647731874	(-0.7, -0.6]	1
+97	Macedonia, FYR	lower-mid	0.325244775525	(0.3, 0.4]	1
+98	Madagascar	low	-0.450820358	(-0.5, -0.4]	1
+99	Malawi	low	0.472332501268	(0.4, 0.5]	1
+100	Malaysia	upper-mid	0.268192793996	(0.2, 0.3]	1
+101	Maldives	lower-mid	0.940167505572	(0.9, 1]	1
+102	Mali	low	0.341311234825	(0.3, 0.4]	1
+103	Malta	upper-mid	-0.890350933697	(-0.9, -0.8]	1
+104	Marshall Islands	lower-mid	0.258171019406	(0.2, 0.3]	1
+105	Mauritania	low	0.571216620633	(0.5, 0.6]	1
+106	Mauritius	upper-mid	0.387771931362	(0.3, 0.4]	1
+107	Mexico	upper-mid	-0.43092300538	(-0.5, -0.4]	1
+108	Micronesia, Fed. Sts.	lower-mid	0.794703219601	(0.7, 0.8]	1
+109	Moldova	low	0.958317523332	(0.9, 1]	1
+110	Mongolia	low	0.905816991874	(0.9, 1]	1
+111	Montenegro	lower-mid	0.880269282328	(0.8, 0.9]	1
+112	Morocco	lower-mid	-0.264483313931	(-0.3, -0.2]	1
+113	Mozambique	low	0.971702822711	(0.9, 1]	1
+114	Namibia	lower-mid	0.341586262127	(0.3, 0.4]	1
+115	Nepal	low	0.914240068068	(0.9, 1]	1
+116	Netherlands	high	-0.92378530841	(-1, -0.9]	1
+117	New Zealand	high	-0.925512415727	(-1, -0.9]	1
+118	Nicaragua	lower-mid	0.851157819804	(0.8, 0.9]	1
+119	Niger	low	0.700579493304	(0.7, 0.8]	1
+120	Nigeria	low	0.185286152179	(0.1, 0.2]	1
+121	Norway	high	-0.938458097529	(-1, -0.9]	1
+122	Oman	upper-mid	-0.863507248993	(-0.9, -0.8]	1
+123	Pakistan	low	0.723148222774	(0.7, 0.8]	1
+124	Palau	upper-mid	-0.136753227734	(-0.2, -0.1]	1
+125	Panama	upper-mid	-0.242691283708	(-0.3, -0.2]	1
+126	Papua New Guinea	low	0.284448509692	(0.2, 0.3]	1
+127	Paraguay	lower-mid	0.0446016091688	(-0, 0.1]	1
+128	Peru	lower-mid	-0.0656029447047	(-0.1, -0]	1
+129	Philippines	lower-mid	0.792757055813	(0.7, 0.8]	1
+130	Poland	upper-mid	-0.198213728607	(-0.2, -0.1]	1
+131	Portugal	upper-mid	-0.85535281727	(-0.9, -0.8]	1
+132	Puerto Rico	high	-0.781570191072	(-0.8, -0.7]	1
+133	Qatar	high	0.0281078841686	(-0, 0.1]	1
+134	Romania	lower-mid	-0.00995141799282	(-0.1, -0]	1
+135	Russia	lower-mid	0.541738029862	(0.5, 0.6]	1
+136	Rwanda	low	0.565194605065	(0.5, 0.6]	1
+137	Samoa	lower-mid	0.982950652915	(0.9, 1]	1
+139	Saudi Arabia	upper-mid	0.763919898483	(0.7, 0.8]	1
+140	Senegal	low	0.70474737581	(0.7, 0.8]	1
+141	Serbia	lower-mid	0.30257292611	(0.3, 0.4]	1
+142	Seychelles	upper-mid	-0.17576850812	(-0.2, -0.1]	1
+143	Sierra Leone	low	0.78875589206	(0.7, 0.8]	1
+144	Singapore	high	-0.910101009204	(-1, -0.9]	1
+145	Slovak Republic	upper-mid	-0.455632930017	(-0.5, -0.4]	1
+146	Slovenia	high	-0.774468077471	(-0.8, -0.7]	1
+147	Solomon Islands	lower-mid	-0.404502226909	(-0.5, -0.4]	1
+148	South Africa	lower-mid	0.600438439553	(0.6, 0.7]	1
+149	Spain	high	-0.83820252851	(-0.9, -0.8]	1
+150	Sri Lanka	lower-mid	0.896956555896	(0.8, 0.9]	1
+151	Sudan	low	0.978073846834	(0.9, 1]	1
+152	Suriname	lower-mid	0.900783462381	(0.9, 1]	1
+153	Swaziland	lower-mid	-0.0878018468111	(-0.1, -0]	1
+154	Sweden	high	-0.846460182729	(-0.9, -0.8]	1
+155	Switzerland	high	-0.91176540899	(-1, -0.9]	1
+156	Syria	lower-mid	-0.206933795687	(-0.3, -0.2]	1
+157	Tajikistan	low	0.95136660832	(0.9, 1]	1
+158	Tanzania	low	0.945005303518	(0.9, 1]	1
+159	Thailand	lower-mid	0.874439724723	(0.8, 0.9]	1
+160	Timor-Leste	low	-0.211485338494	(-0.3, -0.2]	1
+161	Togo	low	0.568730662654	(0.5, 0.6]	1
+162	Tonga	lower-mid	0.973572801685	(0.9, 1]	1
+163	Trinidad and Tobago	upper-mid	0.541797691879	(0.5, 0.6]	1
+164	Tunisia	lower-mid	-0.434720619072	(-0.5, -0.4]	1
+165	Turkey	upper-mid	-0.860235347448	(-0.9, -0.8]	1
+166	Turkmenistan	lower-mid	0.616900272615	(0.6, 0.7]	1
+167	Uganda	low	0.98903572889	(0.9, 1]	1
+168	Ukraine	lower-mid	0.965789058123	(0.9, 1]	1
+169	United Arab Emirates	high	0.833468261802	(0.8, 0.9]	1
+170	United Kingdom	high	-0.862800613469	(-0.9, -0.8]	1
+171	United States	high	-0.972340739322	(-1, -0.9]	1
+172	Uruguay	upper-mid	-0.571647103347	(-0.6, -0.5]	1
+173	Uzbekistan	low	0.693176787225	(0.6, 0.7]	1
+174	Vanuatu	lower-mid	0.567526927904	(0.5, 0.6]	1
+175	Venezuela	upper-mid	0.317440853395	(0.3, 0.4]	1
+176	Vietnam	low	0.995627603592	(0.9, 1]	1
+178	Zambia	low	0.000395727741273	(-0, 0.1]	1
+179	Zimbabwe	low	-0.853981082198	(-0.9, -0.8]	1
